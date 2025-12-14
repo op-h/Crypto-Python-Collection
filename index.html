@@ -30,7 +30,6 @@
             overflow: hidden;
         }
 
-        /* Sidebar Styling */
         .sidebar {
             width: 250px;
             background-color: var(--sidebar-bg);
@@ -73,7 +72,6 @@
             color: var(--accent-color);
         }
 
-        /* Main Content Styling */
         .main-content {
             flex-grow: 1;
             padding: 30px;
@@ -105,7 +103,6 @@
             font-size: 0.95rem;
         }
 
-        /* Code Block Styling */
         .code-container {
             background-color: var(--code-bg);
             border-radius: 8px;
@@ -134,14 +131,12 @@
             color: #a6adc8;
         }
 
-        /* Simple Syntax Highlighting (Simulated) */
-        .kw { color: #cba6f7; } /* Keywords: if, for, while */
-        .str { color: #a6e3a1; } /* Strings */
-        .func { color: #89b4fa; } /* Functions: print, len, ord */
-        .num { color: #fab387; } /* Numbers */
-        .op { color: #89dceb; } /* Operators */
+        .kw { color: #cba6f7; }
+        .str { color: #a6e3a1; }
+        .func { color: #89b4fa; }
+        .num { color: #fab387; }
+        .op { color: #89dceb; }
 
-        /* Run Button & Console */
         .controls {
             margin-bottom: 15px;
         }
@@ -185,7 +180,6 @@
             display: block;
         }
 
-        /* Mobile Responsive */
         @media (max-width: 768px) {
             body {
                 flex-direction: column;
@@ -229,7 +223,7 @@
             PY COLLECTIONS
         </div>
         <ul class="nav-links">
-            <li class="nav-item active" onclick="showTab('tab1')">1. Remove Characters</li>
+            <li class="nav-item active" onclick="showTab('tab1')">1. Clean Text</li>
             <li class="nav-item" onclick="showTab('tab2')">2. Caesar Cipher</li>
             <li class="nav-item" onclick="showTab('tab3')">3. Substitution Cipher</li>
             <li class="nav-item" onclick="showTab('tab4')">4. Vigenère Cipher</li>
@@ -242,323 +236,241 @@
     </div>
 
     <div class="main-content">
-        <!-- Tab 1: Remove Characters -->
+        <!-- Tab 1: Clean Text -->
         <div id="tab1" class="tab-content active">
-            <h2>Remove Characters</h2>
-            <p class="description">Removes a specific letter from a string without using libraries or functions.</p>
-            
+            <h2>Clean Text</h2>
             <div class="code-container">
-                <div class="code-header"><span>remove_characters.py</span></div>
+                <div class="code-header"><span>clean_text.py</span></div>
                 <pre>
-text <span class="op">=</span> <span class="str">"Hello World, this is a python code."</span>
-character_to_remove <span class="op">=</span> <span class="str">"o"</span>
-result <span class="op">=</span> <span class="str">""</span>
+plain <span class="op">=</span> <span class="str">"third stage morning and evening study at Cyber security engineering techniques"</span>
+clean_text <span class="op">=</span> <span class="str">""</span>
+<span class="func">print</span>(plain)
 
-<span class="func">print</span>(<span class="str">"Original Text:"</span>, text)
-<span class="func">print</span>(<span class="str">"Character to remove:"</span>, character_to_remove)
+<span class="kw">for</span> c <span class="kw">in</span> plain:
+    <span class="kw">if</span> c.isalnum():
+        clean_text <span class="op">+=</span> c.upper()
 
-<span class="kw">for</span> char <span class="kw">in</span> text:
-    <span class="kw">if</span> char <span class="op">!=</span> character_to_remove:
-        result <span class="op">=</span> result <span class="op">+</span> char
-
-<span class="func">print</span>(<span class="str">"Result:"</span>, result)</pre>
+<span class="func">print</span>(clean_text)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim1()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim1()">▶ Run Simulation</button></div>
             <div id="out1" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 2: Caesar Cipher -->
         <div id="tab2" class="tab-content">
             <h2>Caesar Cipher</h2>
-            <p class="description">Shifts letters by a fixed number (Key=3) to encrypt and decrypt.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>caesar_cipher.py</span></div>
                 <pre>
 message <span class="op">=</span> <span class="str">"HELLO WORLD"</span>
 shift <span class="op">=</span> <span class="num">3</span>
+clean_text <span class="op">=</span> <span class="str">""</span>
+
+<span class="kw">for</span> c <span class="kw">in</span> message:
+    <span class="kw">if</span> c.isalpha():
+        clean_text <span class="op">+=</span> c.upper()
+
 encrypted_text <span class="op">=</span> <span class="str">""</span>
+<span class="kw">for</span> char <span class="kw">in</span> clean_text:
+    val <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
+    new_val <span class="op">=</span> (val <span class="op">+</span> shift) <span class="op">%</span> <span class="num">26</span>
+    encrypted_text <span class="op">+=</span> <span class="func">chr</span>(new_val <span class="op">+</span> <span class="num">65</span>)
+<span class="func">print</span>(encrypted_text)
+
 decrypted_text <span class="op">=</span> <span class="str">""</span>
-
-<span class="func">print</span>(<span class="str">"Original Message:"</span>, message)
-<span class="func">print</span>(<span class="str">"Shift Key:"</span>, shift)
-
-<span class="kw">for</span> char <span class="kw">in</span> message:
-    <span class="kw">if</span> char.isalpha():
-        original_position <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
-        new_position <span class="op">=</span> (original_position <span class="op">+</span> shift) <span class="op">%</span> <span class="num">26</span>
-        new_char <span class="op">=</span> <span class="func">chr</span>(new_position <span class="op">+</span> <span class="num">65</span>)
-        encrypted_text <span class="op">+=</span> new_char
-    <span class="kw">else</span>:
-        encrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Encrypted:"</span>, encrypted_text)
-
 <span class="kw">for</span> char <span class="kw">in</span> encrypted_text:
-    <span class="kw">if</span> char.isalpha():
-        current_position <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
-        original_position <span class="op">=</span> (current_position <span class="op">-</span> shift) <span class="op">%</span> <span class="num">26</span>
-        original_char <span class="op">=</span> <span class="func">chr</span>(original_position <span class="op">+</span> <span class="num">65</span>)
-        decrypted_text <span class="op">+=</span> original_char
-    <span class="kw">else</span>:
-        decrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Decrypted:"</span>, decrypted_text)</pre>
+    val <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
+    old_val <span class="op">=</span> (val <span class="op">-</span> shift) <span class="op">%</span> <span class="num">26</span>
+    decrypted_text <span class="op">+=</span> <span class="func">chr</span>(old_val <span class="op">+</span> <span class="num">97</span>)
+<span class="func">print</span>(decrypted_text)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim2()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim2()">▶ Run Simulation</button></div>
             <div id="out2" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 3: Substitution Cipher -->
         <div id="tab3" class="tab-content">
             <h2>Substitution Cipher</h2>
-            <p class="description">Replaces every letter based on a scrambled alphabet key.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>substitution_cipher.py</span></div>
                 <pre>
-plain_alphabet <span class="op">=</span> <span class="str">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
-cipher_alphabet <span class="op">=</span> <span class="str">"QWERTYUIOPASDFGHJKLZXCVBNM"</span>
-
+plain <span class="op">=</span> <span class="str">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
+cipher <span class="op">=</span> <span class="str">"QWERTYUIOPASDFGHJKLZXCVBNM"</span>
 message <span class="op">=</span> <span class="str">"HELLO PYTHON"</span>
+clean_text <span class="op">=</span> <span class="str">""</span>
+
+<span class="kw">for</span> c <span class="kw">in</span> message:
+    <span class="kw">if</span> c.isalpha():
+        clean_text <span class="op">+=</span> c.upper()
+
 encrypted_text <span class="op">=</span> <span class="str">""</span>
+<span class="kw">for</span> char <span class="kw">in</span> clean_text:
+    index <span class="op">=</span> plain.find(char)
+    encrypted_text <span class="op">+=</span> cipher[index]
+<span class="func">print</span>(encrypted_text)
+
 decrypted_text <span class="op">=</span> <span class="str">""</span>
-
-<span class="func">print</span>(<span class="str">"Original:"</span>, message)
-
-<span class="kw">for</span> char <span class="kw">in</span> message:
-    <span class="kw">if</span> char <span class="kw">in</span> plain_alphabet:
-        index <span class="op">=</span> plain_alphabet.find(char)
-        encrypted_text <span class="op">+=</span> cipher_alphabet[index]
-    <span class="kw">else</span>:
-        encrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Encrypted:"</span>, encrypted_text)
-
 <span class="kw">for</span> char <span class="kw">in</span> encrypted_text:
-    <span class="kw">if</span> char <span class="kw">in</span> cipher_alphabet:
-        index <span class="op">=</span> cipher_alphabet.find(char)
-        decrypted_text <span class="op">+=</span> plain_alphabet[index]
-    <span class="kw">else</span>:
-        decrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Decrypted:"</span>, decrypted_text)</pre>
+    index <span class="op">=</span> cipher.find(char)
+    decrypted_text <span class="op">+=</span> plain[index].lower()
+<span class="func">print</span>(decrypted_text)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim3()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim3()">▶ Run Simulation</button></div>
             <div id="out3" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 4: Vigenere Cipher -->
         <div id="tab4" class="tab-content">
             <h2>Vigenère Cipher</h2>
-            <p class="description">Encryption using a keyword to shift letters variably.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>vigenere_cipher.py</span></div>
                 <pre>
-message <span class="op">=</span> <span class="str">"ATTACKATDAWN"</span>
+message <span class="op">=</span> <span class="str">"ATTACK AT DAWN"</span>
 key <span class="op">=</span> <span class="str">"LEMON"</span>
-encrypted_text <span class="op">=</span> <span class="str">""</span>
-decrypted_text <span class="op">=</span> <span class="str">""</span>
+clean_text <span class="op">=</span> <span class="str">""</span>
+
+<span class="kw">for</span> c <span class="kw">in</span> message:
+    <span class="kw">if</span> c.isalpha():
+        clean_text <span class="op">+=</span> c.upper()
+
 extended_key <span class="op">=</span> <span class="str">""</span>
 key_index <span class="op">=</span> <span class="num">0</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(clean_text)):
+    extended_key <span class="op">+=</span> key[key_index <span class="op">%</span> <span class="func">len</span>(key)]
+    key_index <span class="op">+=</span> <span class="num">1</span>
 
-<span class="kw">for</span> char <span class="kw">in</span> message:
-    <span class="kw">if</span> char.isalpha():
-        extended_key <span class="op">+=</span> key[key_index <span class="op">%</span> <span class="func">len</span>(key)]
-        key_index <span class="op">+=</span> <span class="num">1</span>
-    <span class="kw">else</span>:
-        extended_key <span class="op">+=</span> char
+encrypted_text <span class="op">=</span> <span class="str">""</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(clean_text)):
+    p <span class="op">=</span> <span class="func">ord</span>(clean_text[i]) <span class="op">-</span> <span class="num">65</span>
+    k <span class="op">=</span> <span class="func">ord</span>(extended_key[i]) <span class="op">-</span> <span class="num">65</span>
+    c <span class="op">=</span> (p <span class="op">+</span> k) <span class="op">%</span> <span class="num">26</span>
+    encrypted_text <span class="op">+=</span> <span class="func">chr</span>(c <span class="op">+</span> <span class="num">65</span>)
+<span class="func">print</span>(encrypted_text)
 
-<span class="func">print</span>(<span class="str">"Message:"</span>, message)
-<span class="func">print</span>(<span class="str">"Key:    "</span>, extended_key)
-
-<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(message)):
-    char <span class="op">=</span> message[i]
-    <span class="kw">if</span> char.isalpha():
-        p_val <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
-        k_val <span class="op">=</span> <span class="func">ord</span>(extended_key[i]) <span class="op">-</span> <span class="num">65</span>
-        c_val <span class="op">=</span> (p_val <span class="op">+</span> k_val) <span class="op">%</span> <span class="num">26</span>
-        encrypted_text <span class="op">+=</span> <span class="func">chr</span>(c_val <span class="op">+</span> <span class="num">65</span>)
-    <span class="kw">else</span>:
-        encrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Encrypted:"</span>, encrypted_text)
-
+decrypted_text <span class="op">=</span> <span class="str">""</span>
 <span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(encrypted_text)):
-    char <span class="op">=</span> encrypted_text[i]
-    <span class="kw">if</span> char.isalpha():
-        c_val <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
-        k_val <span class="op">=</span> <span class="func">ord</span>(extended_key[i]) <span class="op">-</span> <span class="num">65</span>
-        p_val <span class="op">=</span> (c_val <span class="op">-</span> k_val <span class="op">+</span> <span class="num">26</span>) <span class="op">%</span> <span class="num">26</span>
-        decrypted_text <span class="op">+=</span> <span class="func">chr</span>(p_val <span class="op">+</span> <span class="num">65</span>)
-    <span class="kw">else</span>:
-        decrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Decrypted:"</span>, decrypted_text)</pre>
+    c <span class="op">=</span> <span class="func">ord</span>(encrypted_text[i]) <span class="op">-</span> <span class="num">65</span>
+    k <span class="op">=</span> <span class="func">ord</span>(extended_key[i]) <span class="op">-</span> <span class="num">65</span>
+    p <span class="op">=</span> (c <span class="op">-</span> k) <span class="op">%</span> <span class="num">26</span>
+    decrypted_text <span class="op">+=</span> <span class="func">chr</span>(p <span class="op">+</span> <span class="num">97</span>)
+<span class="func">print</span>(decrypted_text)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim4()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim4()">▶ Run Simulation</button></div>
             <div id="out4" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 5: OTP -->
         <div id="tab5" class="tab-content">
             <h2>OTP (Sum & XOR)</h2>
-            <p class="description">Demonstrates encryption using both bitwise XOR and Simple Sum.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>otp_cipher.py</span></div>
                 <pre>
 message <span class="op">=</span> <span class="str">"HELLO"</span>
 key <span class="op">=</span> <span class="str">"XMCKL"</span>
+clean_text <span class="op">=</span> <span class="str">""</span>
 
-<span class="func">print</span>(<span class="str">"Message:"</span>, message)
-<span class="func">print</span>(<span class="str">"Key:    "</span>, key)
+<span class="kw">for</span> c <span class="kw">in</span> message:
+    <span class="kw">if</span> c.isalpha():
+        clean_text <span class="op">+=</span> c.upper()
 
-xor_encrypted <span class="op">=</span> []
-<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(message)):
-    val <span class="op">=</span> <span class="func">ord</span>(message[i]) <span class="op">^</span> <span class="func">ord</span>(key[i]) 
-    xor_encrypted.append(val)
+xor_enc <span class="op">=</span> []
+<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(clean_text)):
+    val <span class="op">=</span> <span class="func">ord</span>(clean_text[i]) <span class="op">^</span> <span class="func">ord</span>(key[i]) 
+    xor_enc.append(val)
+<span class="func">print</span>(xor_enc)
 
-<span class="func">print</span>(<span class="str">"Encrypted (numbers):"</span>, xor_encrypted)
+xor_dec <span class="op">=</span> <span class="str">""</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(clean_text)):
+    val <span class="op">=</span> xor_enc[i] <span class="op">^</span> <span class="func">ord</span>(key[i])
+    xor_dec <span class="op">+=</span> <span class="func">chr</span>(val).lower()
+<span class="func">print</span>(xor_dec)
 
-xor_decrypted <span class="op">=</span> <span class="str">""</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(message)):
-    val <span class="op">=</span> xor_encrypted[i] <span class="op">^</span> <span class="func">ord</span>(key[i])
-    xor_decrypted <span class="op">+=</span> <span class="func">chr</span>(val)
+sum_enc <span class="op">=</span> []
+<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(clean_text)):
+    val <span class="op">=</span> <span class="func">ord</span>(clean_text[i]) <span class="op">+</span> <span class="func">ord</span>(key[i])
+    sum_enc.append(val)
+<span class="func">print</span>(sum_enc)
 
-<span class="func">print</span>(<span class="str">"Decrypted:"</span>, xor_decrypted)
-
-sum_encrypted <span class="op">=</span> []
-<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(message)):
-    val <span class="op">=</span> <span class="func">ord</span>(message[i]) <span class="op">+</span> <span class="func">ord</span>(key[i])
-    sum_encrypted.append(val)
-
-<span class="func">print</span>(<span class="str">"Encrypted (numbers):"</span>, sum_encrypted)
-
-sum_decrypted <span class="op">=</span> <span class="str">""</span>
-<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(message)):
-    val <span class="op">=</span> sum_encrypted[i] <span class="op">-</span> <span class="func">ord</span>(key[i])
-    sum_decrypted <span class="op">+=</span> <span class="func">chr</span>(val)
-
-<span class="func">print</span>(<span class="str">"Decrypted:"</span>, sum_decrypted)</pre>
+sum_dec <span class="op">=</span> <span class="str">""</span>
+<span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="func">len</span>(clean_text)):
+    val <span class="op">=</span> sum_enc[i] <span class="op">-</span> <span class="func">ord</span>(key[i])
+    sum_dec <span class="op">+=</span> <span class="func">chr</span>(val).lower()
+<span class="func">print</span>(sum_dec)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim5()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim5()">▶ Run Simulation</button></div>
             <div id="out5" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 6: Affine -->
         <div id="tab6" class="tab-content">
             <h2>Affine Cipher</h2>
-            <p class="description">Mathematical encryption using formula (ax + b) % 26.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>affine_cipher.py</span></div>
                 <pre>
 message <span class="op">=</span> <span class="str">"AFFINE"</span>
 a <span class="op">=</span> <span class="num">5</span>
 b <span class="op">=</span> <span class="num">8</span>
+clean_text <span class="op">=</span> <span class="str">""</span>
+
+<span class="kw">for</span> c <span class="kw">in</span> message:
+    <span class="kw">if</span> c.isalpha():
+        clean_text <span class="op">+=</span> c.upper()
+
 encrypted_text <span class="op">=</span> <span class="str">""</span>
+<span class="kw">for</span> char <span class="kw">in</span> clean_text:
+    x <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
+    e <span class="op">=</span> (a <span class="op">*</span> x <span class="op">+</span> b) <span class="op">%</span> <span class="num">26</span>
+    encrypted_text <span class="op">+=</span> <span class="func">chr</span>(e <span class="op">+</span> <span class="num">65</span>)
+<span class="func">print</span>(encrypted_text)
+
 decrypted_text <span class="op">=</span> <span class="str">""</span>
-
-<span class="func">print</span>(<span class="str">"Message:"</span>, message)
-
-<span class="kw">for</span> char <span class="kw">in</span> message:
-    <span class="kw">if</span> char.isalpha():
-        x <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
-        e <span class="op">=</span> (a <span class="op">*</span> x <span class="op">+</span> b) <span class="op">%</span> <span class="num">26</span>
-        encrypted_text <span class="op">+=</span> <span class="func">chr</span>(e <span class="op">+</span> <span class="num">65</span>)
-    <span class="kw">else</span>:
-        encrypted_text <span class="op">+=</span> char
-
-<span class="func">print</span>(<span class="str">"Encrypted:"</span>, encrypted_text)
-
 a_inv <span class="op">=</span> <span class="num">0</span>
 <span class="kw">for</span> i <span class="kw">in</span> <span class="func">range</span>(<span class="num">26</span>):
     <span class="kw">if</span> (a <span class="op">*</span> i) <span class="op">%</span> <span class="num">26</span> <span class="op">==</span> <span class="num">1</span>:
         a_inv <span class="op">=</span> i
-        <span class="kw">break</span>
 
-<span class="kw">if</span> a_inv <span class="op">!=</span> <span class="num">0</span>:
-    <span class="kw">for</span> char <span class="kw">in</span> encrypted_text:
-        <span class="kw">if</span> char.isalpha():
-            e <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
-            d <span class="op">=</span> (a_inv <span class="op">*</span> (e <span class="op">-</span> b)) <span class="op">%</span> <span class="num">26</span>
-            decrypted_text <span class="op">+=</span> <span class="func">chr</span>(d <span class="op">+</span> <span class="num">65</span>)
-        <span class="kw">else</span>:
-            decrypted_text <span class="op">+=</span> char
-    <span class="func">print</span>(<span class="str">"Decrypted:"</span>, decrypted_text)
-<span class="kw">else</span>:
-    <span class="func">print</span>(<span class="str">"Error: 'a' has no modular inverse."</span>)</pre>
+<span class="kw">for</span> char <span class="kw">in</span> encrypted_text:
+    e <span class="op">=</span> <span class="func">ord</span>(char) <span class="op">-</span> <span class="num">65</span>
+    d <span class="op">=</span> (a_inv <span class="op">*</span> (e <span class="op">-</span> b)) <span class="op">%</span> <span class="num">26</span>
+    decrypted_text <span class="op">+=</span> <span class="func">chr</span>(d <span class="op">+</span> <span class="num">97</span>)
+<span class="func">print</span>(decrypted_text)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim6()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim6()">▶ Run Simulation</button></div>
             <div id="out6" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 7: Frequency -->
         <div id="tab7" class="tab-content">
             <h2>Frequency Analysis</h2>
-            <p class="description">Counts occurrences of letters in a text using a dictionary.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>frequency_analysis.py</span></div>
                 <pre>
 text <span class="op">=</span> <span class="str">"THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG"</span>
-<span class="func">print</span>(<span class="str">"Text:"</span>, text)
+clean_text <span class="op">=</span> <span class="str">""</span>
+
+<span class="kw">for</span> c <span class="kw">in</span> text:
+    <span class="kw">if</span> c.isalpha():
+        clean_text <span class="op">+=</span> c.upper()
 
 frequencies <span class="op">=</span> {}
-
-<span class="kw">for</span> char <span class="kw">in</span> text:
-    <span class="kw">if</span> char.isalpha():
-        <span class="kw">if</span> char <span class="kw">in</span> frequencies:
-            frequencies[char] <span class="op">=</span> frequencies[char] <span class="op">+</span> <span class="num">1</span>
-        <span class="kw">else</span>:
-            frequencies[char] <span class="op">=</span> <span class="num">1</span>
+<span class="kw">for</span> char <span class="kw">in</span> clean_text:
+    <span class="kw">if</span> char <span class="kw">in</span> frequencies:
+        frequencies[char] <span class="op">+=</span> <span class="num">1</span>
+    <span class="kw">else</span>:
+        frequencies[char] <span class="op">=</span> <span class="num">1</span>
 
 alphabet <span class="op">=</span> <span class="str">"ABCDEFGHIJKLMNOPQRSTUVWXYZ"</span>
-
 <span class="kw">for</span> letter <span class="kw">in</span> alphabet:
     <span class="kw">if</span> letter <span class="kw">in</span> frequencies:
-        count <span class="op">=</span> frequencies[letter]
-        <span class="func">print</span>(letter, <span class="str">":"</span>, count)</pre>
+        <span class="func">print</span>(letter, <span class="str">":"</span>, frequencies[letter])</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim7()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim7()">▶ Run Simulation</button></div>
             <div id="out7" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 8: RSA -->
         <div id="tab8" class="tab-content">
-            <h2>RSA Encryption (Simplified)</h2>
-            <p class="description">Basic RSA mathematics showing key generation and exponential math.</p>
-            
+            <h2>RSA Encryption</h2>
             <div class="code-container">
                 <div class="code-header"><span>rsa_simple.py</span></div>
                 <pre>
@@ -574,106 +486,85 @@ d <span class="op">=</span> <span class="num">0</span>
         d <span class="op">=</span> k
         <span class="kw">break</span>
 
-<span class="func">print</span>(<span class="str">"Public Key: (e="</span>, e, <span class="str">", n="</span>, n, <span class="str">")"</span>)
-<span class="func">print</span>(<span class="str">"Private Key: (d="</span>, d, <span class="str">", n="</span>, n, <span class="str">")"</span>)
+<span class="func">print</span>(e, n)
+<span class="func">print</span>(d, n)
 
-original_number <span class="op">=</span> <span class="num">7</span>
-<span class="func">print</span>(<span class="str">"Original Number:"</span>, original_number)
+original <span class="op">=</span> <span class="num">7</span>
+<span class="func">print</span>(original)
 
-encrypted_number <span class="op">=</span> (original_number <span class="op">**</span> e) <span class="op">%</span> n
-<span class="func">print</span>(<span class="str">"Encrypted Number:"</span>, encrypted_number)
+encrypted <span class="op">=</span> (original <span class="op">**</span> e) <span class="op">%</span> n
+<span class="func">print</span>(encrypted)
 
-decrypted_number <span class="op">=</span> (encrypted_number <span class="op">**</span> d) <span class="op">%</span> n
-<span class="func">print</span>(<span class="str">"Decrypted Number:"</span>, decrypted_number)</pre>
+decrypted <span class="op">=</span> (encrypted <span class="op">**</span> d) <span class="op">%</span> n
+<span class="func">print</span>(decrypted)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim8()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim8()">▶ Run Simulation</button></div>
             <div id="out8" class="console-output">Click run to see output...</div>
         </div>
 
         <!-- Tab 9: GCD -->
         <div id="tab9" class="tab-content">
             <h2>GCD (Greatest Common Divisor)</h2>
-            <p class="description">Finds the GCD of two numbers using Euclidean algorithm loops.</p>
-            
             <div class="code-container">
                 <div class="code-header"><span>gcd_simple.py</span></div>
                 <pre>
 num1 <span class="op">=</span> <span class="num">48</span>
 num2 <span class="op">=</span> <span class="num">18</span>
 
-<span class="func">print</span>(<span class="str">"Number 1:"</span>, num1)
-<span class="func">print</span>(<span class="str">"Number 2:"</span>, num2)
-
 <span class="kw">while</span> num2 <span class="op">!=</span> <span class="num">0</span>:
     temp <span class="op">=</span> num2
     num2 <span class="op">=</span> num1 <span class="op">%</span> num2
     num1 <span class="op">=</span> temp
 
-<span class="func">print</span>(<span class="str">"GCD is:"</span>, num1)</pre>
+<span class="func">print</span>(num1)</pre>
             </div>
-
-            <div class="controls">
-                <button class="btn-run" onclick="runSim9()">▶ Run Simulation</button>
-            </div>
-            <span class="console-label">Output Console</span>
+            <div class="controls"><button class="btn-run" onclick="runSim9()">▶ Run Simulation</button></div>
             <div id="out9" class="console-output">Click run to see output...</div>
         </div>
 
     </div>
 
     <script>
-        // Tab Switching Logic
         function showTab(tabId) {
-            // Hide all tabs
             document.querySelectorAll('.tab-content').forEach(tab => {
                 tab.classList.remove('active');
             });
-            // Deactivate all nav links
             document.querySelectorAll('.nav-item').forEach(item => {
                 item.classList.remove('active');
             });
             
-            // Show selected tab
             document.getElementById(tabId).classList.add('active');
-            // Activate selected nav link
             const index = tabId.replace('tab', '') - 1;
             document.querySelectorAll('.nav-item')[index].classList.add('active');
         }
 
-        // Helper to mimic python print()
         function printToConsole(id, text) {
             const consoleDiv = document.getElementById(id);
-            // Append with newline
             consoleDiv.innerText += text + "\n";
         }
 
-        // Clears the console before running
         function resetConsole(id) {
             document.getElementById(id).innerText = "";
         }
 
-        // --- Simulations (JS Logic that mimics the Python exactly) ---
+        // --- Simulations ---
 
         function runSim1() {
             const out = "out1";
             resetConsole(out);
-            let text = "Hello World, this is a python code.";
-            let charToRemove = "o";
-            let result = "";
-            
-            printToConsole(out, "Original Text: " + text);
-            printToConsole(out, "Character to remove: " + charToRemove);
-            
-            for(let i=0; i<text.length; i++) {
-                if(text[i] !== charToRemove) {
-                    result += text[i];
+            let plain = "third stage morning and evening study at Cyber security engineering techniques";
+            let clean_text = "";
+
+            printToConsole(out, plain);
+
+            for(let i=0; i<plain.length; i++) {
+                let c = plain[i];
+                if(c.match(/[a-zA-Z0-9]/)) {
+                    clean_text += c;
                 }
             }
-            printToConsole(out, "Result: " + result);
+            clean_text = clean_text.toUpperCase();
+            printToConsole(out, clean_text);
         }
 
         function runSim2() {
@@ -681,39 +572,29 @@ num2 <span class="op">=</span> <span class="num">18</span>
             resetConsole(out);
             let message = "HELLO WORLD";
             let shift = 3;
-            let encrypted = "";
-            let decrypted = "";
+            let clean_text = "";
 
-            printToConsole(out, "Original Message: " + message);
-            printToConsole(out, "Shift Key: " + shift);
-
-            // Encrypt
             for(let i=0; i<message.length; i++) {
-                let charCode = message.charCodeAt(i);
-                if(charCode >= 65 && charCode <= 90) { // isalpha (uppercase)
-                    let origPos = charCode - 65;
-                    let newPos = (origPos + shift) % 26;
-                    encrypted += String.fromCharCode(newPos + 65);
-                } else {
-                    encrypted += message[i];
+                if(message[i].match(/[a-zA-Z]/)) {
+                    clean_text += message[i].toUpperCase();
                 }
             }
-            printToConsole(out, "Encrypted: " + encrypted);
 
-            // Decrypt
-            for(let i=0; i<encrypted.length; i++) {
-                let charCode = encrypted.charCodeAt(i);
-                if(charCode >= 65 && charCode <= 90) {
-                    let currPos = charCode - 65;
-                    // JS modulo of negative numbers behaves differently than Python
-                    // so we add 26 before modulo
-                    let origPos = (currPos - shift + 26) % 26;
-                    decrypted += String.fromCharCode(origPos + 65);
-                } else {
-                    decrypted += encrypted[i];
-                }
+            let encrypted = "";
+            for(let i=0; i<clean_text.length; i++) {
+                let val = clean_text.charCodeAt(i) - 65;
+                let newVal = (val + shift) % 26;
+                encrypted += String.fromCharCode(newVal + 65);
             }
-            printToConsole(out, "Decrypted: " + decrypted);
+            printToConsole(out, encrypted);
+
+            let decrypted = "";
+            for(let i=0; i<encrypted.length; i++) {
+                let val = encrypted.charCodeAt(i) - 65;
+                let oldVal = (val - shift + 26) % 26; 
+                decrypted += String.fromCharCode(oldVal + 97);
+            }
+            printToConsole(out, decrypted);
         }
 
         function runSim3() {
@@ -722,78 +603,66 @@ num2 <span class="op">=</span> <span class="num">18</span>
             let plain = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             let cipher = "QWERTYUIOPASDFGHJKLZXCVBNM";
             let message = "HELLO PYTHON";
-            let encrypted = "";
-            let decrypted = "";
-
-            printToConsole(out, "Original: " + message);
+            let clean_text = "";
 
             for(let i=0; i<message.length; i++) {
-                let char = message[i];
-                let idx = plain.indexOf(char);
-                if(idx !== -1) {
-                    encrypted += cipher[idx];
-                } else {
-                    encrypted += char;
+                if(message[i].match(/[a-zA-Z]/)) {
+                    clean_text += message[i].toUpperCase();
                 }
             }
-            printToConsole(out, "Encrypted: " + encrypted);
 
-            for(let i=0; i<encrypted.length; i++) {
-                let char = encrypted[i];
-                let idx = cipher.indexOf(char);
-                if(idx !== -1) {
-                    decrypted += plain[idx];
-                } else {
-                    decrypted += char;
-                }
+            let encrypted = "";
+            for(let i=0; i<clean_text.length; i++) {
+                let idx = plain.indexOf(clean_text[i]);
+                encrypted += cipher[idx];
             }
-            printToConsole(out, "Decrypted: " + decrypted);
+            printToConsole(out, encrypted);
+
+            let decrypted = "";
+            for(let i=0; i<encrypted.length; i++) {
+                let idx = cipher.indexOf(encrypted[i]);
+                decrypted += plain[idx].toLowerCase();
+            }
+            printToConsole(out, decrypted);
         }
 
         function runSim4() {
             const out = "out4";
             resetConsole(out);
-            let message = "ATTACKATDAWN";
+            let message = "ATTACK AT DAWN";
             let key = "LEMON";
+            let clean_text = "";
+
+            for(let i=0; i<message.length; i++) {
+                if(message[i].match(/[a-zA-Z]/)) {
+                    clean_text += message[i].toUpperCase();
+                }
+            }
+
+            let extended_key = "";
+            let key_idx = 0;
+            for(let i=0; i<clean_text.length; i++) {
+                extended_key += key[key_idx % key.length];
+                key_idx++;
+            }
+
             let encrypted = "";
+            for(let i=0; i<clean_text.length; i++) {
+                let p = clean_text.charCodeAt(i) - 65;
+                let k = extended_key.charCodeAt(i) - 65;
+                let c = (p + k) % 26;
+                encrypted += String.fromCharCode(c + 65);
+            }
+            printToConsole(out, encrypted);
+
             let decrypted = "";
-            let extendedKey = "";
-            let keyIndex = 0;
-
-            for(let i=0; i<message.length; i++) {
-                if(message[i].match(/[A-Z]/)) {
-                    extendedKey += key[keyIndex % key.length];
-                    keyIndex++;
-                } else {
-                    extendedKey += message[i];
-                }
-            }
-            printToConsole(out, "Message: " + message);
-            printToConsole(out, "Key:     " + extendedKey);
-
-            for(let i=0; i<message.length; i++) {
-                if(message[i].match(/[A-Z]/)) {
-                    let pVal = message.charCodeAt(i) - 65;
-                    let kVal = extendedKey.charCodeAt(i) - 65;
-                    let cVal = (pVal + kVal) % 26;
-                    encrypted += String.fromCharCode(cVal + 65);
-                } else {
-                    encrypted += message[i];
-                }
-            }
-            printToConsole(out, "Encrypted: " + encrypted);
-
             for(let i=0; i<encrypted.length; i++) {
-                if(encrypted[i].match(/[A-Z]/)) {
-                    let cVal = encrypted.charCodeAt(i) - 65;
-                    let kVal = extendedKey.charCodeAt(i) - 65;
-                    let pVal = (cVal - kVal + 26) % 26;
-                    decrypted += String.fromCharCode(pVal + 65);
-                } else {
-                    decrypted += encrypted[i];
-                }
+                let c = encrypted.charCodeAt(i) - 65;
+                let k = extended_key.charCodeAt(i) - 65;
+                let p = (c - k + 26) % 26;
+                decrypted += String.fromCharCode(p + 97);
             }
-            printToConsole(out, "Decrypted: " + decrypted);
+            printToConsole(out, decrypted);
         }
 
         function runSim5() {
@@ -801,33 +670,37 @@ num2 <span class="op">=</span> <span class="num">18</span>
             resetConsole(out);
             let message = "HELLO";
             let key = "XMCKL";
+            let clean_text = "";
 
-            printToConsole(out, "Message: " + message);
-            printToConsole(out, "Key:     " + key);
+            for(let i=0; i<message.length; i++) {
+                if(message[i].match(/[a-zA-Z]/)) {
+                    clean_text += message[i].toUpperCase();
+                }
+            }
 
             let xorEnc = [];
-            for(let i=0; i<message.length; i++) {
-                xorEnc.push(message.charCodeAt(i) ^ key.charCodeAt(i));
+            for(let i=0; i<clean_text.length; i++) {
+                xorEnc.push(clean_text.charCodeAt(i) ^ key.charCodeAt(i));
             }
-            printToConsole(out, "Encrypted (numbers): [" + xorEnc.join(", ") + "]");
+            printToConsole(out, "[" + xorEnc.join(", ") + "]");
 
             let xorDec = "";
-            for(let i=0; i<message.length; i++) {
-                xorDec += String.fromCharCode(xorEnc[i] ^ key.charCodeAt(i));
+            for(let i=0; i<clean_text.length; i++) {
+                xorDec += String.fromCharCode(xorEnc[i] ^ key.charCodeAt(i)).toLowerCase();
             }
-            printToConsole(out, "Decrypted: " + xorDec);
+            printToConsole(out, xorDec);
 
             let sumEnc = [];
-            for(let i=0; i<message.length; i++) {
-                sumEnc.push(message.charCodeAt(i) + key.charCodeAt(i));
+            for(let i=0; i<clean_text.length; i++) {
+                sumEnc.push(clean_text.charCodeAt(i) + key.charCodeAt(i));
             }
-            printToConsole(out, "Encrypted (numbers): [" + sumEnc.join(", ") + "]");
+            printToConsole(out, "[" + sumEnc.join(", ") + "]");
 
             let sumDec = "";
-            for(let i=0; i<message.length; i++) {
-                sumDec += String.fromCharCode(sumEnc[i] - key.charCodeAt(i));
+            for(let i=0; i<clean_text.length; i++) {
+                sumDec += String.fromCharCode(sumEnc[i] - key.charCodeAt(i)).toLowerCase();
             }
-            printToConsole(out, "Decrypted: " + sumDec);
+            printToConsole(out, sumDec);
         }
 
         function runSim6() {
@@ -836,21 +709,21 @@ num2 <span class="op">=</span> <span class="num">18</span>
             let message = "AFFINE";
             let a = 5;
             let b = 8;
-            let encrypted = "";
-            let decrypted = "";
+            let clean_text = "";
 
-            printToConsole(out, "Message: " + message);
-            
             for(let i=0; i<message.length; i++) {
-                if(message[i].match(/[A-Z]/)) {
-                    let x = message.charCodeAt(i) - 65;
-                    let e = (a * x + b) % 26;
-                    encrypted += String.fromCharCode(e + 65);
-                } else {
-                    encrypted += message[i];
+                if(message[i].match(/[a-zA-Z]/)) {
+                    clean_text += message[i].toUpperCase();
                 }
             }
-            printToConsole(out, "Encrypted: " + encrypted);
+
+            let encrypted = "";
+            for(let i=0; i<clean_text.length; i++) {
+                let x = clean_text.charCodeAt(i) - 65;
+                let e = (a * x + b) % 26;
+                encrypted += String.fromCharCode(e + 65);
+            }
+            printToConsole(out, encrypted);
 
             let a_inv = 0;
             for(let i=0; i<26; i++) {
@@ -860,44 +733,38 @@ num2 <span class="op">=</span> <span class="num">18</span>
                 }
             }
 
-            if(a_inv !== 0) {
-                for(let i=0; i<encrypted.length; i++) {
-                    if(encrypted[i].match(/[A-Z]/)) {
-                        let e = encrypted.charCodeAt(i) - 65;
-                        let d = (a_inv * (e - b)) % 26;
-                        // Handle negative modulo in JS
-                        if(d < 0) d += 26;
-                        decrypted += String.fromCharCode(d + 65);
-                    } else {
-                        decrypted += encrypted[i];
-                    }
-                }
-                printToConsole(out, "Decrypted: " + decrypted);
-            } else {
-                printToConsole(out, "Error: 'a' has no modular inverse.");
+            let decrypted = "";
+            for(let i=0; i<encrypted.length; i++) {
+                let e = encrypted.charCodeAt(i) - 65;
+                let d = (a_inv * (e - b)) % 26;
+                if(d < 0) d += 26;
+                decrypted += String.fromCharCode(d + 97);
             }
+            printToConsole(out, decrypted);
         }
 
         function runSim7() {
             const out = "out7";
             resetConsole(out);
             let text = "THE QUICK BROWN FOX JUMPS OVER THE LAZY DOG";
-            printToConsole(out, "Text: " + text);
+            let clean_text = "";
+            for(let i=0; i<text.length; i++) {
+                if(text[i].match(/[a-zA-Z]/)) {
+                    clean_text += text[i].toUpperCase();
+                }
+            }
 
             let freqs = {};
-            for(let i=0; i<text.length; i++) {
-                let char = text[i];
-                if(char.match(/[A-Z]/)) {
-                    if(freqs[char]) freqs[char]++;
-                    else freqs[char] = 1;
-                }
+            for(let i=0; i<clean_text.length; i++) {
+                let char = clean_text[i];
+                if(freqs[char]) freqs[char]++;
+                else freqs[char] = 1;
             }
 
             let alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             for(let i=0; i<alphabet.length; i++) {
-                let letter = alphabet[i];
-                if(freqs[letter]) {
-                    printToConsole(out, letter + " : " + freqs[letter]);
+                if(freqs[alphabet[i]]) {
+                    printToConsole(out, alphabet[i] + " : " + freqs[alphabet[i]]);
                 }
             }
         }
@@ -918,21 +785,17 @@ num2 <span class="op">=</span> <span class="num">18</span>
                     break;
                 }
             }
-            printToConsole(out, "Public Key: (e=" + e + ", n=" + n + ")");
-            printToConsole(out, "Private Key: (d=" + d + ", n=" + n + ")");
+            printToConsole(out, e + " " + n);
+            printToConsole(out, d + " " + n);
 
             let original = 7;
-            printToConsole(out, "Original Number: " + original);
+            printToConsole(out, original);
 
-            // Simple power function for simulation
             let enc = Math.pow(original, e) % n;
-            printToConsole(out, "Encrypted Number: " + enc);
+            printToConsole(out, enc);
             
-            // Note: JS Math.pow can lose precision on large numbers, 
-            // but for these small RSA numbers it works perfectly.
-            // Using BigInt would be safer for larger nums, but keeping it simple.
             let dec = Number(BigInt(enc) ** BigInt(d) % BigInt(n));
-            printToConsole(out, "Decrypted Number: " + dec);
+            printToConsole(out, dec);
         }
 
         function runSim9() {
@@ -941,17 +804,13 @@ num2 <span class="op">=</span> <span class="num">18</span>
             let num1 = 48;
             let num2 = 18;
 
-            printToConsole(out, "Number 1: " + num1);
-            printToConsole(out, "Number 2: " + num2);
-
             while(num2 !== 0) {
                 let temp = num2;
                 num2 = num1 % num2;
                 num1 = temp;
             }
-            printToConsole(out, "GCD is: " + num1);
+            printToConsole(out, num1);
         }
-
     </script>
 </body>
 </html>
